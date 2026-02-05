@@ -1,9 +1,8 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 
-const repoName = "va"; // ✅ must match your GitHub repo name exactly
-
-export default defineConfig({
+export default defineConfig(({ command }) => ({
   plugins: [react()],
-  base: `/${va}/`,
-});
+  // ✅ localhost uses "/", build for GitHub Pages uses "/va/"
+  base: command === "build" ? "/va/" : "/",
+}));
